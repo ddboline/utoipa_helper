@@ -55,7 +55,6 @@ struct Test1 {
 derive_utoipa_schema!(Test01, Test1);
 
 #[derive(UtoipaResponse)]
-/// Test Description
 #[response(status = OK, description = "Test Description")]
 #[rustfmt::skip]
 struct TestResponse0(JsonResponse::<Test01>);

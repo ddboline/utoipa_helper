@@ -1,6 +1,6 @@
 [package]
 name = "utoipa-helper"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "Helper For utoipa_axum"
 license = "MIT"
