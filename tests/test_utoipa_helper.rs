@@ -160,9 +160,9 @@ async fn test_basic_example() {
 
     let expected = include_str!("test_basic_example.json");
 
-    assert_eq!(&api, expected);
-
     // std::fs::write("test_basic_example.json", &api).unwrap();
+
+    assert_eq!(&api, expected);
 
     task.abort();
 }
