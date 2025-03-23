@@ -1,4 +1,5 @@
 use axum::extract::Path;
+use derive_more::{From, Into};
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -9,7 +10,6 @@ use utoipa_rapidoc::RapiDoc;
 use utoipa_redoc::{Redoc, Servable};
 use utoipa_swagger_ui::SwaggerUi;
 use uuid::Uuid;
-use derive_more::{Into, From};
 
 use utoipa::{IntoResponses, PartialSchema, ToSchema};
 use utoipa_helper::{
@@ -19,6 +19,7 @@ use utoipa_helper::{
 
 #[derive(UtoipaResponse)]
 #[response(status = OK, description = "test response")]
+#[rustfmt::skip]
 struct TestResponse(HtmlResponse::<String>);
 
 #[derive(Serialize, ToSchema)]
@@ -30,6 +31,7 @@ struct TestJson {
 
 #[derive(UtoipaResponse)]
 #[response(status = CREATED, description = "json test")]
+#[rustfmt::skip]
 struct TestJsonResponse(JsonResponse::<TestJson>);
 
 #[derive(Serialize, Deserialize, Clone, Copy)]
@@ -55,6 +57,7 @@ derive_utoipa_schema!(Test01, Test1);
 #[derive(UtoipaResponse)]
 /// Test Description
 #[response(status = OK, description = "Test Description")]
+#[rustfmt::skip]
 struct TestResponse0(JsonResponse::<Test01>);
 
 #[allow(dead_code)]
