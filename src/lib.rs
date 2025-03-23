@@ -1,14 +1,40 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+pub mod content_type_trait;
+pub mod html_response;
+pub mod json_response;
+pub mod response_description_trait;
+pub mod status_code_trait;
+
+pub use utoipa_helper_macro::UtoipaResponse;
+
+#[macro_export]
+macro_rules! derive_utoipa_schema {
+    ($T0:ty, $T1:ty) => {
+        impl utoipa::PartialSchema for $T0 {
+            fn schema() -> utoipa::openapi::RefOr<utoipa::openapi::schema::Schema> {
+                <$T1>::schema()
+            }
+        }
+
+        impl utoipa::ToSchema for $T0 {
+            fn name() -> std::borrow::Cow<'static, str> {
+                assert_eq!(std::mem::size_of::<$T0>(), std::mem::size_of::<$T1>());
+                <$T1>::name()
+            }
+            fn schemas(
+                schemas: &mut Vec<(
+                    String,
+                    utoipa::openapi::RefOr<utoipa::openapi::schema::Schema>,
+                )>,
+            ) {
+                <$T1>::schemas(schemas)
+            }
+        }
+    };
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[macro_export]
+macro_rules! derive_utoipa_test {
+    ($T0:ty, $T1:ty) => {
+        assert_eq!(std::mem::size_of::<$T0>(), std::mem::size_of::<$T1>());
+    };
 }
