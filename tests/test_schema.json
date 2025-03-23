@@ -1,0 +1,106 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Utoipa Helper",
+    "description": "Helper Macros For Utoipa Axum",
+    "license": {
+      "name": "MIT",
+      "identifier": "MIT"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "test_response",
+        "responses": {
+          "200": {
+            "description": "Test Description",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "a",
+                    "b"
+                  ],
+                  "properties": {
+                    "a": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "fieldA",
+                      "minimum": 0
+                    },
+                    "b": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "fieldB",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "405": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Test1": {
+        "type": "object",
+        "required": [
+          "a",
+          "b"
+        ],
+        "properties": {
+          "a": {
+            "type": "integer",
+            "format": "int32",
+            "description": "fieldA",
+            "minimum": 0
+          },
+          "b": {
+            "type": "integer",
+            "format": "int32",
+            "description": "fieldB",
+            "minimum": 0
+          }
+        }
+      },
+      "TestJson": {
+        "type": "object",
+        "required": [
+          "field",
+          "id",
+          "value"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
