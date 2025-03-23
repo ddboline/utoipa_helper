@@ -6,7 +6,7 @@ pub struct ContentTypeHtml {}
 pub struct ContentTypeCss {}
 pub struct ContentTypeJs {}
 
-pub struct ContentTypeJavascript {}
+pub struct ContentTypeJson {}
 
 #[macro_export]
 macro_rules! derive_content_type {
@@ -25,4 +25,4 @@ macro_rules! derive_content_type {
 derive_content_type!(ContentTypeHtml, "text/html");
 derive_content_type!(ContentTypeCss, "text/css");
 derive_content_type!(ContentTypeJs, "text/javascript");
-derive_content_type!(ContentTypeJavascript, "application/json");
+derive_content_type!(ContentTypeJson, "application/json");
