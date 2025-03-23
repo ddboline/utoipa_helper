@@ -73,7 +73,7 @@ pub fn derive_utoipa_response_fn(input: TokenStream) -> TokenStream {
     let content = match utoipa_response.content.as_deref() {
         Some("text/html") => Some(quote! {utoipa_helper::content_type_trait::ContentTypeHtml}),
         Some("text/css") => Some(quote! {utoipa_helper::content_type_trait::ContentTypeCss}),
-        Some("application/json") => Some(quote! {utoipa_helper::content_type_trait::ContentTypeJs}),
+        Some("text/javascript") => Some(quote! {utoipa_helper::content_type_trait::ContentTypeJs}),
         Some(val) => panic!("{} is not a valid content type", val),
         None => None,
     };
