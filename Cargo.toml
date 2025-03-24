@@ -6,20 +6,18 @@ description = "Helper Crate For Utoipa Axum Integration."
 license = "MIT"
 
 [dependencies]
-axum = { version = "0.8", features = ["multipart"] }
-rust_decimal = {version="1.37", features=["db-tokio-postgres"]}
-derive_more = {version="2.0", features=["full"]}
-serde = { version="1.0", features=["derive"] }
-serde_json = "1.0"
-time = {version="0.3", features = ["serde-human-readable"], optional = true}
-tokio = {version="1.43", features=["rt", "macros", "rt-multi-thread"]}
-utoipa = { version = "5.3", features = ["axum_extras", "yaml", "time", "uuid", "smallvec", "url", "openapi_extensions", "decimal"] }
-utoipa-axum = { version = "0.2" }
+axum = "0.8"
+serde = "1.0"
+utoipa = "5.3"
 utoipa-helper-macro = {version="0.1.2", path = "./utoipa_helper_macro"}
-uuid = {version="1.1", features=["serde", "v4"]}
 
 [dev-dependencies]
+derive_more = {version="2.0", features=["full"]}
+rust_decimal = "1.37"
 reqwest = {version = "0.12", default-features = false, features=["cookies", "rustls-tls", "gzip", "json"]}
-
-[features]
-default = ["time"]
+serde = { version="1.0", features=["derive"] }
+serde_json = "1.0"
+tokio = {version="1.43", features=["rt", "macros", "rt-multi-thread"]}
+utoipa = { version = "5.3", features = ["axum_extras", "yaml", "uuid", "openapi_extensions", "decimal"] }
+utoipa-axum = { version = "0.2" }
+uuid = {version="1.1", features=["serde", "v4"]}
