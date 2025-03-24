@@ -3,8 +3,10 @@ name = "utoipa-helper-macro"
 version = "0.1.2"
 authors = ["Daniel Boline <ddboline@gmail.com>"]
 edition = "2024"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Proc Macro for Utopia Helper Crate"
+license = "MIT"
+homepage = "https://github.com/ddboline/utoipa_helper"
+repository = "https://github.com/ddboline/utoipa_helper"
 
 [dependencies]
 syn = {version="2.0", features=["full", "printing", "extra-traits", "parsing"]}

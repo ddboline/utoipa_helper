@@ -1,9 +1,13 @@
 [package]
 name = "utoipa-helper"
 version = "0.1.2"
+authors = ["Daniel Boline <ddboline@gmail.com>"]
 edition = "2024"
 description = "Helper Crate For Utoipa Axum Integration."
 license = "MIT"
+homepage = "https://github.com/ddboline/utoipa_helper"
+repository = "https://github.com/ddboline/utoipa_helper"
+readme = "README.md"
 
 [dependencies]
 axum = "0.8"
