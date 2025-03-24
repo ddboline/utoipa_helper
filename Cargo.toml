@@ -15,10 +15,7 @@ time = {version="0.3", features = ["serde-human-readable"], optional = true}
 tokio = {version="1.43", features=["rt", "macros", "rt-multi-thread"]}
 utoipa = { version = "5.3", features = ["axum_extras", "yaml", "time", "uuid", "smallvec", "url", "openapi_extensions", "decimal"] }
 utoipa-axum = { version = "0.2" }
-utoipa-helper-macro = {path = "./utoipa_helper_macro"}
-utoipa-redoc = {version="6.0", features=["axum"]}
-utoipa-rapidoc = {version="6.0", features=["axum"]}
-utoipa-swagger-ui = { version = "9.0" , features = ["axum"] }
+utoipa-helper-macro = {version="0.1.2", path = "./utoipa_helper_macro"}
 uuid = {version="1.1", features=["serde", "v4"]}
 
 [dev-dependencies]
