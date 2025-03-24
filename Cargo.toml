@@ -2,7 +2,7 @@
 name = "utoipa-helper"
 version = "0.1.2"
 edition = "2024"
-description = "Helper For utoipa_axum"
+description = "Helper Crate For Utoipa Axum Integration."
 license = "MIT"
 
 [dependencies]
