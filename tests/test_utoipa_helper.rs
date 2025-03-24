@@ -1,14 +1,12 @@
 use axum::extract::Path;
 use derive_more::{From, Into};
+use reqwest::StatusCode;
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
 use utoipa::OpenApi;
-use utoipa_rapidoc::RapiDoc;
-use utoipa_redoc::{Redoc, Servable};
-use utoipa_swagger_ui::SwaggerUi;
 use uuid::Uuid;
 
 use utoipa::{IntoResponses, PartialSchema, ToSchema};
@@ -115,10 +113,26 @@ async fn test_basic_example() {
         .routes(utoipa_axum::routes!(test_json))
         .split_for_parts();
 
+    let spec_json = api.to_pretty_json().unwrap();
+    let spec_yaml = api.to_yaml().unwrap();
+
     let router = router
-        .merge(SwaggerUi::new("/swaggerui").url("/api/openapi.json", api.clone()))
-        .merge(Redoc::with_url("/api/redoc", api.clone()))
-        .merge(RapiDoc::new("/api/openapi.json").path("/rapidoc"));
+        .route(
+            "/api/openapi.json",
+            axum::routing::get(|| async move {
+                (
+                    StatusCode::OK,
+                    [("content-type", "application/json")],
+                    spec_json,
+                )
+            }),
+        )
+        .route(
+            "/api/openapi.yaml",
+            axum::routing::get(|| async move {
+                (StatusCode::OK, [("content-type", "text/yaml")], spec_yaml)
+            }),
+        );
 
     let host = "0.0.0.0";
     let port = 54321;
@@ -162,7 +176,9 @@ async fn test_basic_example() {
 
     let expected = include_str!("test_basic_example.json");
 
-    // std::fs::write("test_basic_example.json", &api).unwrap();
+    if &api != expected {
+        std::fs::write("test_basic_example.json", &api).unwrap();
+    }
 
     assert_eq!(&api, expected);
 
@@ -192,8 +208,10 @@ async fn test_api_spec() {
         .routes(utoipa_axum::routes!(test_response))
         .split_for_parts();
     let spec_json = serde_json::to_string_pretty(&spec).unwrap();
-    println!("{}", spec_json);
-    // std::fs::write("./new_schema.json", &spec_json).unwrap();
+
     let expected = include_str!("test_schema.json");
+    if &spec_json != expected {
+        std::fs::write("./new_schema.json", &spec_json).unwrap();
+    }
     assert_eq!(&spec_json, expected);
 }
