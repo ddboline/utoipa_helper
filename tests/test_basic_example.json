@@ -45,6 +45,10 @@
     }
   },
   "info": {
+    "contact": {
+      "email": "ddboline@gmail.com",
+      "name": "Daniel Boline"
+    },
     "description": "Helper Macros For Utoipa Axum",
     "license": {
       "identifier": "MIT",

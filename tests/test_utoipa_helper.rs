@@ -177,7 +177,7 @@ async fn test_basic_example() {
     let expected = include_str!("test_basic_example.json");
 
     if &api != expected {
-        std::fs::write("test_basic_example.json", &api).unwrap();
+        std::fs::write("./tests/test_basic_example.json", &api).unwrap();
     }
 
     assert_eq!(&api, expected);
@@ -211,7 +211,7 @@ async fn test_api_spec() {
 
     let expected = include_str!("test_schema.json");
     if &spec_json != expected {
-        std::fs::write("./new_schema.json", &spec_json).unwrap();
+        std::fs::write("./tests/test_schema.json", &spec_json).unwrap();
     }
     assert_eq!(&spec_json, expected);
 }
