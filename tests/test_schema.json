@@ -17,6 +17,30 @@
     "/": {
       "get": {
         "operationId": "test_response",
+        "parameters": [
+          {
+            "name": "a",
+            "in": "query",
+            "description": "fieldA",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "b",
+            "in": "query",
+            "description": "fieldB",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Test Description",
@@ -64,7 +88,7 @@
   },
   "components": {
     "schemas": {
-      "Test1": {
+      "Test0": {
         "type": "object",
         "required": [
           "a",

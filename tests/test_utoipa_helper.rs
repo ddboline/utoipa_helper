@@ -1,4 +1,4 @@
-use axum::extract::Path;
+use axum::extract::{Path, Query};
 use derive_more::{From, Into};
 use reqwest::StatusCode;
 use rust_decimal::Decimal;
@@ -6,13 +6,13 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
-use utoipa::OpenApi;
+use utoipa::{IntoParams, OpenApi};
 use uuid::Uuid;
 
 use utoipa::{IntoResponses, PartialSchema, ToSchema};
 use utoipa_helper::{
-    UtoipaResponse, derive_utoipa_schema, derive_utoipa_test, html_response::HtmlResponse,
-    json_response::JsonResponse,
+    UtoipaResponse, derive_utoipa_params, derive_utoipa_schema, derive_utoipa_test,
+    html_response::HtmlResponse, json_response::JsonResponse,
 };
 
 #[derive(UtoipaResponse)]
@@ -42,7 +42,8 @@ struct Test0 {
 struct Test01(Test0);
 
 #[allow(dead_code)]
-#[derive(Serialize, Deserialize, Clone, Copy, ToSchema)]
+#[derive(Serialize, Deserialize, Clone, Copy, ToSchema, IntoParams)]
+#[schema(as = Test0)]
 struct Test1 {
     /// fieldA
     a: u8,
@@ -51,6 +52,7 @@ struct Test1 {
 }
 
 derive_utoipa_schema!(Test01, Test1);
+derive_utoipa_params!(Test01, Test1);
 
 #[derive(UtoipaResponse)]
 #[response(status = OK, description = "Test Description")]
@@ -84,7 +86,7 @@ impl std::fmt::Display for TestError {
 #[derive(OpenApi)]
 #[openapi(
     info(title = "Utoipa Helper", description = "Helper Macros For Utoipa Axum"),
-    components(schemas(TestJson, Test1))
+    components(schemas(TestJson, Test01))
 )]
 struct ApiDoc;
 
@@ -198,9 +200,10 @@ fn test_derive_utoipa_test() {
 
 #[tokio::test]
 async fn test_api_spec() {
-    #[utoipa::path(get, path = "/", responses(TestResponse0, TestError))]
-    async fn test_response() -> Result<TestResponse0, TestError> {
-        let x = Test0 { a: 2, b: 3 };
+    #[utoipa::path(get, path = "/", params(Test01), responses(TestResponse0, TestError))]
+    async fn test_response(query: Query<Test01>) -> Result<TestResponse0, TestError> {
+        let Query(Test01(x)) = query;
+
         Ok(JsonResponse::new(x.into()).into())
     }
 

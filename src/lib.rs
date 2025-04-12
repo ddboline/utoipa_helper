@@ -33,6 +33,19 @@ macro_rules! derive_utoipa_schema {
 }
 
 #[macro_export]
+macro_rules! derive_utoipa_params {
+    ($T0:ty, $T1:ty) => {
+        impl utoipa::IntoParams for $T0 {
+            fn into_params(
+                parameter_in_provider: impl Fn() -> Option<utoipa::openapi::path::ParameterIn>,
+            ) -> Vec<utoipa::openapi::path::Parameter> {
+                <$T1>::into_params(parameter_in_provider)
+            }
+        }
+    };
+}
+
+#[macro_export]
 macro_rules! derive_utoipa_test {
     ($T0:ty, $T1:ty) => {
         assert_eq!(std::mem::size_of::<$T0>(), std::mem::size_of::<$T1>());
