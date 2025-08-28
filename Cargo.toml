@@ -1,6 +1,6 @@
 [package]
 name = "utoipa-helper"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Daniel Boline <ddboline@gmail.com>"]
 edition = "2024"
 description = "Helper Crate For Utoipa Axum Integration."
@@ -13,7 +13,7 @@ readme = "README.md"
 axum = "0.8"
 serde = "1.0"
 utoipa = "5.4"
-utoipa-helper-macro = {version="0.1.2", path = "./utoipa_helper_macro"}
+utoipa-helper-macro = {path = "./utoipa_helper_macro"}
 
 [dev-dependencies]
 derive_more = {version="2.0", features=["full"]}
